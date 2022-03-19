@@ -1,0 +1,22 @@
+<div class="container">
+    <form [formGroup]="prestForm" (ngSubmit)="functioncall()">
+      <app-input type="date" name="fecha_ent" title="Fecha entrega" [control]="fechaEntField"></app-input>
+      <app-input type="date" name="fecha_dev" title="Fecha devolución" [control]="fechaDevField"></app-input>
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>Libro</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="id_libro">
+            <mat-option *ngFor="let book of books" name="id_libro" [value]="book.id_libro">
+              {{book.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      
+      <div class="containerButtons">
+        <app-button [type]="'submit'" type="submit" [type]="'submit'" [class]="'primary'" [label]="'Realizar préstamo'">
+        </app-button>
+      </div>
+    </form>
+  </div>
+  

@@ -1,0 +1,53 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 30px;
+  .title {
+    text-align: center;
+    font-size: large;
+    color: white;
+    background-color: #c2185b;
+  }
+  .containerList {
+    display: flex;
+    justify-content: space-between;
+    table {
+      margin: 0 auto;
+      border-radius: 30px;
+      max-width: 60%;
+      tr.example-detail-row {
+        height: 0;
+        background-color: #c9618a;
+      }
+      tr.example-element-row {
+        cursor: pointer;
+        &:hover {
+          background: #be698b;
+        }
+      }
+
+      .example-element-detail {
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        .example-element-diagram {
+          width: 100%;
+          padding: 5px;
+          padding-top: 25px;
+          .container__dates {
+            display: flex;
+            justify-content: space-between;
+            .example-element {
+              font-size: 16px;
+              line-height: normal;
+            }
+          }
+        }
+      }
+    }
+  }
+}

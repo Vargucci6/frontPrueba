@@ -1,0 +1,224 @@
+<div class="container">
+  <div class="signOut">
+    <app-button
+      [class]="'basic'"
+      (onClick)="signOut()"
+      [label]="'Cerrar sesión'"
+    >
+    </app-button>
+    <app-button
+      [class]="'primary'"
+      (onClick)="openDialogBook()"
+      [label]="'Registrar libro'"
+    >
+    </app-button>
+    <app-button
+      [class]="'primary'"
+      (onClick)="openDialogPrest()"
+      [label]="'Realizar prestamo'"
+    >
+    </app-button>
+  </div>
+
+  <!-- Listar usuarios -->
+
+  <div class="containerList">
+    <table
+      mat-table
+      [dataSource]="dataSourceUser"
+      multiTemplateDataRows
+      class="mat-elevation-z8"
+    >
+      <ng-container
+        matColumnDef="{{ column }}"
+        *ngFor="let column of columnsToDisplayUser"
+      >
+        <th mat-header-cell *matHeaderCellDef class="title">Usuarios</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="columnsToDisplayUser.length"
+        >
+          <div
+            class="example-element-detail"
+            [@detailExpand]="
+              element == expandedElementUser ? 'expanded' : 'collapsed'
+            "
+          >
+            <div class="example-element-diagram">
+              <div class="container__dates">
+                <div class="example-element">Nombre:</div>
+                <div class="example-element">{{ element.username }}</div>
+              </div>
+              <div class="container__dates">
+                <div class="example-element">Contraseña:</div>
+                <div class="example-element">{{ element.password }}</div>
+              </div>
+              <div class="buttons">
+                <app-button
+                  [class]="'basic'"
+                  (onClick)="openDialog(element.id_user)"
+                  [label]="'Gestionar'"
+                >
+                </app-button>
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayUser"></tr>
+      <tr
+        mat-row
+        *matRowDef="let element; columns: columnsToDisplayUser"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElementUser === element"
+        (click)="
+          expandedElementUser = expandedElementUser === element ? null : element
+        "
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="example-detail-row"
+      ></tr>
+    </table>
+
+    <!-- listar libros -->
+
+    <table
+      mat-table
+      [dataSource]="dataSourceBook"
+      multiTemplateDataRows
+      class="mat-elevation-z8"
+    >
+      <ng-container
+        matColumnDef="{{ column }}"
+        *ngFor="let column of columnsToDisplayBook"
+      >
+        <th mat-header-cell *matHeaderCellDef class="title">Libros</th>
+        <td mat-cell *matCellDef="let book">{{ book[column] }}</td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetailBook">
+        <td
+          mat-cell
+          *matCellDef="let book"
+          [attr.colspan]="columnsToDisplayBook.length"
+        >
+          <div
+            class="example-element-detail"
+            [@detailExpand]="
+              book == expandedElementBook ? 'expanded' : 'collapsed'
+            "
+          >
+            <div class="example-element-diagram">
+              <div class="container__dates">
+                <div class="example-element">Autor:</div>
+                <div class="example-element">{{ book.author }}</div>
+              </div>
+              <div class="buttons">
+                <app-button
+                  [class]="'basic'"
+                  (onClick)="openDialogEditBook(book.id_libro)"
+                  [label]="'Gestionar'"
+                >
+                </app-button>
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayBook"></tr>
+      <tr
+        mat-row
+        *matRowDef="let book; columns: columnsToDisplayBook"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElementBook === book"
+        (click)="
+          expandedElementBook = expandedElementBook === book ? null : book
+        "
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetailBook']"
+        class="example-detail-row"
+      ></tr>
+    </table>
+
+    <!-- listar prestamos -->
+
+    <table
+      mat-table
+      [dataSource]="dataSourcePrest"
+      multiTemplateDataRows
+      class="mat-elevation-z8"
+    >
+      <ng-container
+        matColumnDef="{{ column }}"
+        *ngFor="let column of columnsToDisplayPrest"
+      >
+        <th mat-header-cell *matHeaderCellDef class="title">Prestamos</th>
+        <td mat-cell *matCellDef="let Prest">{{ Prest[column] }}</td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetailPrest">
+        <td
+          mat-cell
+          *matCellDef="let Prest"
+          [attr.colspan]="columnsToDisplayPrest.length"
+        >
+          <div
+            class="example-element-detail"
+            [@detailExpand]="
+              Prest == expandedElementPrest ? 'expanded' : 'collapsed'
+            "
+          >
+            <div class="example-element-diagram">
+              <div class="container__dates">
+                <div class="example-element">Fecha de entrega:</div>
+                <div class="example-element">{{ Prest.fecha_ent }}</div>
+              </div>
+              <div class="container__dates">
+                <div class="example-element">Fecha de devolución:</div>
+                <div class="example-element">{{ Prest.fecha_dev }}</div>
+              </div>
+              <div class="buttons">
+                <app-button
+                  [class]="'basic'"
+                  (onClick)="openDialogEditBook(Prest.id_libro)"
+                  [label]="'Gestionar'"
+                >
+                </app-button>
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayPrest"></tr>
+      <tr
+        mat-row
+        *matRowDef="let Prest; columns: columnsToDisplayPrest"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElementPrest === Prest"
+        (click)="
+          expandedElementPrest = expandedElementPrest === Prest ? null : Prest
+        "
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetailPrest']"
+        class="example-detail-row"
+      ></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="container">
+    <form [formGroup]="bookForm" (ngSubmit)="functioncall()">
+      <app-input name="name" title="Nombre" [control]="nameField"></app-input>
+      <app-input name="author" title="Autor" [control]="authorField"></app-input>
+      <div class="containerButtons">
+        <app-button [type]="'submit'" type="submit" [type]="'submit'" [class]="'primary'" [label]="'Añadir'">
+        </app-button>
+      </div>
+    </form>
+  </div>
+  

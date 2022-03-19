@@ -1,0 +1,18 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .inputRegister {
+      margin: 0 auto;
+    }
+    .containerButtons {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

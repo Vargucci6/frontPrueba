@@ -1,0 +1,26 @@
+.example-form-field {
+  width: 500px;
+  margin-top: 10px;
+  margin: 0 auto;
+  .label__example {
+    width: 100%;
+  }
+  input {
+    color: white;
+    width: 100%;
+  }
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  transition: 0.5s;
+  cursor: pointer;
+  &:hover {
+    font-size: 1rem;
+    transition: 0.5s;
+  }
+}
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  width: 500px;
+}

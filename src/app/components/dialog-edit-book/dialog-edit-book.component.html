@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Editar usuario</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <form [formGroup]="editForm">
+      <app-input name="name" title="Nombre" [control]="nameField"></app-input>
+      <app-input name="author" title="Autor" [control]="authorField"></app-input>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-button [class]="'basic'" mat-dialog-close [label]="'Cancelar'"></app-button>
+  <app-button [type]="'submit'" (click)="functioncall()" [class]="'primary'" [label]="'Editar'"> </app-button>
+  <app-button [type]="'submit'" (click)="delete()" [class]="'warn'" mat-dialog-close [label]="'Eliminar'"> </app-button>
+</mat-dialog-actions>

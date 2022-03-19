@@ -1,0 +1,14 @@
+<div class="container">
+  <form [formGroup]="signUpForm" (ngSubmit)="functioncall()">
+    <app-input name="name" title="Nombre" [control]="nameField"></app-input>
+    <app-input name="email" title="Email" [control]="emailField"></app-input>
+    <app-input-pass name="password" title="Contraseña" [control]="passwordField"></app-input-pass>
+    <!-- <app-input-pass name="confirmPassword" title="Verificar Contraseña" [password1]="passwordField.value"  [control]="confirmPasswordField">
+    </app-input-pass> -->
+    <div class="containerButtons">
+      <app-button [type]="'submit'" type="submit" [type]="'submit'" [class]="'primary'" [label]="'Registrarse'">
+      </app-button>
+      <app-button [class]="'basic'" [label]="'Iniciar sesion'" [routerLink]="'login'"></app-button>
+    </div>
+  </form>
+</div>
