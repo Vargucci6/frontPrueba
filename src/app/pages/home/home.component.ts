@@ -9,6 +9,7 @@ import { InicioComponent } from '../inicio/inicio.component';
 import { RegisterBookComponent } from 'src/app/components/register-book/register-book.component';
 import { DialogEditBookComponent } from 'src/app/components/dialog-edit-book/dialog-edit-book.component';
 import { DialogPrestComponent } from 'src/app/components/dialog-prest/dialog-prest.component';
+import { DialogEditPrestComponent } from 'src/app/components/dialog-edit-prest/dialog-edit-prest.component';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
   dataSourcePrest: Prestamos[];
   columnsToDisplayUser = ['email'];
   columnsToDisplayBook = ['name'];
-  columnsToDisplayPrest = ['id_libro'];
+  columnsToDisplayPrest = ['fecha_dev'];
   expandedElementUser: Usuarios | null;
   expandedElementBook: Libros | null;
   expandedElementPrest: Prestamos | null;
@@ -47,6 +48,9 @@ export class HomeComponent implements OnInit {
   @Input() id_libro: string;
   @Input() nameBook: string;
   @Input() author: string;
+  @Input() fechaEnt: string;
+  @Input() id_prestamo: string;
+  @Input() fechaDev: string;
 
   constructor(private httpClient: HttpClient, private toastSvc: ToastrService, private router: Router, public dialog: MatDialog) { }
 
@@ -164,6 +168,44 @@ export class HomeComponent implements OnInit {
                   if (res) {
                     this.dataSourceBook = res;
                     console.log(this.data_book)
+                  } else {
+                    this.toastSvc.warning(`Debes iniciar sesión primeramente`, 'SM Digital');
+                  }
+                });
+            });
+          });
+        } else {
+          this.toastSvc.error(`Error`, 'SM Digital');
+        }
+      })
+    console.log(`${this.name} ${this.email} ${this.password}`)
+    return id;
+  }
+  openDialogEditPrest(id: number) {
+    this.httpClient.get<Prestamos[]>(`${this.backendHost}prestamos/${id}`)
+      .subscribe(res => {
+        if (res) {
+          this.data_prest = res
+          this.data_prest.forEach(element => {
+            this.id_libro = element.id_libro as unknown as string;
+            this.fechaEnt = element.fecha_ent;
+            this.fechaDev = element.fecha_dev;
+            this.id_prestamo = element.id_prestamo as unknown as string;
+            sessionStorage.setItem('id_prestamo', this.id_prestamo);
+            sessionStorage.setItem('id_libro', this.id_libro);
+            sessionStorage.setItem('fechaEnt', this.fechaEnt);
+            sessionStorage.setItem('fechaDev', this.fechaDev);
+            const dialogRef = this.dialog.open(DialogEditPrestComponent);
+            dialogRef.afterClosed().subscribe(result => {
+              sessionStorage.setItem('id_prestamo', "");
+              sessionStorage.setItem('id_libro', "");
+              sessionStorage.setItem('fechaEnt', "");
+              sessionStorage.setItem('fechaDev', "");
+              this.httpClient.get<Prestamos[]>(`${this.backendHost}prestamos`)
+                .subscribe(res => {
+                  if (res) {
+                    this.dataSourcePrest = res;
+                    console.log(this.data_prest)
                   } else {
                     this.toastSvc.warning(`Debes iniciar sesión primeramente`, 'SM Digital');
                   }

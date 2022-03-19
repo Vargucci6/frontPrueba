@@ -43,10 +43,10 @@ export class DialogEditBookComponent implements OnInit {
     this.httpClient.put(`${this.backendHost}updateBook/${this.id_libro}`, this.editForm.value)
       .subscribe(res => {
         if (res) {
-          this.toastSvc.success(`Usuario actualizado correctamente`, 'New Inntech');
+          this.toastSvc.success(`Usuario actualizado correctamente`, 'SM Digit');
           this.dialog.closeAll();
         } else {
-          this.toastSvc.error(`Correo electrónico ya usado`, 'New Inntech');
+          this.toastSvc.error(`Correo electrónico ya usado`, 'SM Digit');
         }
       });
   }
@@ -54,9 +54,9 @@ export class DialogEditBookComponent implements OnInit {
     this.httpClient.delete(`${this.backendHost}deleteBook/${this.id_libro}`)
       .subscribe(res => {
         if (res) {
-          this.toastSvc.success(`Usuario eliminado correctamente`, 'New Inntech');
+          this.toastSvc.success(`Usuario eliminado correctamente`, 'SM Digit');
         } else {
-          this.toastSvc.error(`Error al eliminar usuario`, 'New Inntech');
+          this.toastSvc.error(`Error al eliminar usuario`, 'SM Digit');
         }
       });
   }

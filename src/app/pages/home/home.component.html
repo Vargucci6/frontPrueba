@@ -191,10 +191,14 @@
                 <div class="example-element">Fecha de devolución:</div>
                 <div class="example-element">{{ Prest.fecha_dev }}</div>
               </div>
+              <div class="container__dates">
+                <div class="example-element">Id libro:</div>
+                <div class="example-element">{{ Prest.id_libro }}</div>
+              </div>
               <div class="buttons">
                 <app-button
                   [class]="'basic'"
-                  (onClick)="openDialogEditBook(Prest.id_libro)"
+                  (onClick)="openDialogEditPrest(Prest.id_prestamo)"
                   [label]="'Gestionar'"
                 >
                 </app-button>

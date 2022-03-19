@@ -1,1 +1,24 @@
-<p>dialog-edit-prest works!</p>
+<h2 mat-dialog-title>Editar prestamo</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <form [formGroup]="editForm">
+      <app-input type="date" name="fecha_ent" title="Fecha entrega" [control]="fechaEntField"></app-input>
+      <app-input type="date" name="fecha_dev" title="Fecha devolución" [control]="fechaDevField"></app-input>
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>Libro</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="id_libro">
+            <mat-option *ngFor="let book of books" name="id_libro" [value]="book.id_libro">
+              {{book.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-button [class]="'basic'" mat-dialog-close [label]="'Cancelar'"></app-button>
+  <app-button [type]="'submit'" (click)="functioncall()" [class]="'primary'" [label]="'Editar'"> </app-button>
+  <app-button [type]="'submit'" (click)="delete()" [class]="'warn'" mat-dialog-close [label]="'Eliminar'"> </app-button>
+</mat-dialog-actions>
